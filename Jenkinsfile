@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-      nodejs '24.1.0'
+      nodejs '27.1.0'
     }
     stages {
         stage('print versions') {
