@@ -1,23 +1,28 @@
 pipeline {
     agent any
+
     tools {
-      nodejs 'node'
+        nodejs 'node'  // This 'node' should match the name in Jenkins Global Tool Config
     }
+
     stages {
-        stage('print versions') {
-          steps {
-            sh 'npm version'
-          }
-        }
-        stage('Install') { 
+        stage('Clone Code') {
             steps {
-              sh 'npm install'
+                git 'https://github.com/SandeshSS27/HelloWorld.git'
             }
         }
-        stage('Build') { 
+
+        stage('Install Dependencies') {
             steps {
-                sh 'npm run build' 
+                sh 'npm install'
+            }
+        }
+
+        stage('Run App') {
+            steps {
+                sh 'nohup npm start &'
             }
         }
     }
 }
+
